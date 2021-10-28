@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# kubectl display labels plugin
+# version 0.1
+
+if test $# -eq 0; then
+	echo bad args
+	exit 1
+elif test $# -eq 1; then
+	kubectl get $1 --show-labels | grep -v NAME | tr -s " " | cut -d " " -f 6 | tr "," "\n" | column -t -s /
+else
+	echo bad args
+	exit 1
+fi
